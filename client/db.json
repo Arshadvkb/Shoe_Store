@@ -1,0 +1,38 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Air Jordan",
+      "price":4999,
+      "colors":["black","blue","red","green"],
+      "description": "Running Shoes",
+      "category": ["men", "women"]
+    },
+    {
+      "id": 2,
+      "name": "Oddisya",
+      "price": 4999,
+      "colors": ["black", "brown","white"],
+      "description": "school Shoes",
+      "category": ["men", "women"]
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Arshad VKB",
+      "username": "arshad",
+      "email": "arshad@gmail.com",
+      "password": "Arshad@0987",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "name": "Arun",
+      "username": "arun",
+      "email": "arun@gmail.com",
+      "password": "Arun@0987",
+      "role": "user"
+    }
+  ]
+}
