@@ -1,16 +1,20 @@
-import { Route, Routes } from "react-router-dom"
-import Login from "../pages/auth/Login"
-import Register from "../pages/auth/Register"
+import { Route, Routes } from "react-router-dom";
+import Login from "../pages/auth/Login";
+import { AuthContextProvider } from "../context/AuthContext_Provider";
+import Register from "../pages/auth/Register";
+
 
 const Auth_router = () => {
   return (
     <div>
-      <Routes>
-        <Route path="/" element={<Login/>}/>
-        <Route path="/register" element={<Register/>}/>
-      </Routes>
+      <AuthContextProvider>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register/>} />
+        </Routes>
+      </AuthContextProvider>
     </div>
-  )
-}
+  );
+};
 
-export default Auth_router
+export default Auth_router;
