@@ -4,16 +4,17 @@ import { Link } from "react-router-dom";
 import{LogIn} from "lucide-react"
 const Login = () => {
   const { dispatch, login } = useContext(AuthContext);
-  const [uname, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const userData = { email: email, password: password };
     dispatch({
       type: "LOGIN",
-      payload: { username: uname, password: password },
+      payload: { userData},
     });
-    login();
+    login(userData);
   };
 
   return (
@@ -22,14 +23,16 @@ const Login = () => {
         <LogIn className=" text-primary text-3xl"/>
         <h1 className="text-2xl font-bold text-primary">Welcome Back!</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+          <label >Email:</label>
           <input
-            placeholder="User name"
-            value={uname}
-            onChange={(e) => setName(e.target.value)}
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             id="username"
             className="border-2 border-black rounded-xl pl-2 bg-neutral h-8"
             type="text"
           />
+          <label >Password:</label>
           <input
             placeholder="password"
             value={password}

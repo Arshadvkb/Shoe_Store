@@ -25,9 +25,7 @@ const Register = () => {
       };
       dispatch({
         type: "REGISTER",
-        payload: {userData
-         
-        },
+        payload: { userData },
       });
       register(userData);
     } else {
@@ -38,8 +36,12 @@ const Register = () => {
   return (
     <div>
       <div>
-        <h1>Welcome to our Store</h1>
+        <div>
+          <h1>Welcome to our Store</h1>
+          <p>Create Your Account</p>
+        </div>
         <form onSubmit={handleSubmit}>
+          <label>Name:</label>
           <input
             type="text"
             id="name"
@@ -48,6 +50,7 @@ const Register = () => {
             onChange={(e) => setName(e.target.value)}
             placeholder="Enter name..."
           />
+          <label>User Name:</label>
           <input
             type="text"
             id="username"
@@ -56,6 +59,7 @@ const Register = () => {
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter username"
           />
+          <label>Email:</label>
           <input
             type="email"
             id="email"
@@ -64,6 +68,7 @@ const Register = () => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter user name"
           />
+          <label>Password:</label>
           <input
             type="text"
             id="password"
@@ -72,6 +77,7 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="password"
           />
+          <label>Confirm Password:</label>
           <input
             type="text"
             id="confirm"
