@@ -3,7 +3,7 @@
     {
       "id": "1",
       "name": "Air Jordan",
-      "images":[],
+      "images": [],
       "price": 4999,
       "colors": [
         "black",
@@ -20,7 +20,7 @@
     {
       "id": "2",
       "name": "Oddisya",
-      "images":[],
+      "images": [],
       "price": 4999,
       "colors": [
         "black",
@@ -50,6 +50,16 @@
       "email": "arun@gmail.com",
       "password": "Arun@0987",
       "role": "user"
+    },
+    {
+      "name": "Arshadvkb",
+      "username": "arshadvkb",
+      "email": "arshadvkb969@gmail.com",
+      "password": "123456789999",
+      "role": "user",
+      "id": "y_LAKCkB7nc"
     }
-  ]
+   
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
