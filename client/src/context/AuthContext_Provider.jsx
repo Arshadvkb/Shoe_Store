@@ -9,6 +9,8 @@ const initialState = {
   email: "",
   password: "",
   role: "",
+  cart: [],
+  wishlist: [],
 };
 
 const reducer = (state, action) => {
@@ -21,7 +23,7 @@ const reducer = (state, action) => {
     case "REGISTER":
       return {
         ...state,
-        ...action.payload,
+        ...action.payload.userData,
       };
     default:
       return state;
@@ -65,7 +67,7 @@ export const AuthContextProvider = (props) => {
     }
   };
 
-  const register = async () => {
+  const register = async (userData) => {
     try {
       const response = await axios.get("http://localhost:5000/users");
 
@@ -73,7 +75,7 @@ export const AuthContextProvider = (props) => {
 
       const existingUser = users.find(
         (data) =>
-          data.username === state.username || data.email === state.email,
+          data.username === userData.username || data.email === userData.email,
       );
 
       if (existingUser) {
@@ -81,9 +83,8 @@ export const AuthContextProvider = (props) => {
         return;
       }
 
-      const newUser = await axios.post(`http://localhost:5000/users`,state);
+      const newUser = await axios.post(`http://localhost:5000/users`, userData);
       console.log(newUser);
-      
     } catch (e) {
       console.log(e.message);
     }

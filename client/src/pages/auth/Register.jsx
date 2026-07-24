@@ -14,17 +14,22 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password == confirmp) {
+      const userData = {
+        name: name,
+        username: username,
+        email: email,
+        password: password,
+        role: "user",
+        cart: [],
+        wishlist: [],
+      };
       dispatch({
         type: "REGISTER",
-        payload: {
-          name: name,
-          username: username,
-          email: email,
-          password: password,
-          role: "user",
+        payload: {userData
+         
         },
       });
-      register();
+      register(userData);
     } else {
       alert("password and confirm password must be same");
     }
