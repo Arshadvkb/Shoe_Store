@@ -90,11 +90,17 @@ export const AuthContextProvider = (props) => {
     }
   };
 
+  const logout=()=>{
+    console.log("logout clicked");
+    
+  }
+
   const values = {
     state,
     dispatch,
     login,
     register,
+    logout,
   };
 
   return (
