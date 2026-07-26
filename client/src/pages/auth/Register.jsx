@@ -34,13 +34,15 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <div>
+    <div className="min-h-screen min-w-screen bg-neutral flex items-center justify-center">
+      <div className="h-[80vh] w-[25vw] bg-secondary flex flex-col items-center justify-evenly rounded-2xl">
         <div>
-          <h1>Welcome to our Store</h1>
-          <p>Create Your Account</p>
+          <h1 className="text-2xl font-bold text-primary">
+            Welcome to our Store
+          </h1>
+          <p className=" text-center">Create Your Account</p>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <label>Name:</label>
           <input
             type="text"
@@ -49,6 +51,7 @@ const Register = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Enter name..."
+            className="border-2 border-black rounded-xl pl-2 bg-neutral h-8"
           />
           <label>User Name:</label>
           <input
@@ -58,6 +61,7 @@ const Register = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter username"
+            className="border-2 border-black rounded-xl pl-2 bg-neutral h-8"
           />
           <label>Email:</label>
           <input
@@ -66,7 +70,8 @@ const Register = () => {
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter user name"
+            placeholder="Enter user email"
+            className="border-2 border-black rounded-xl pl-2 bg-neutral h-8"
           />
           <label>Password:</label>
           <input
@@ -76,6 +81,7 @@ const Register = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="password"
+            className="border-2 border-black rounded-xl pl-2 bg-neutral h-8"
           />
           <label>Confirm Password:</label>
           <input
@@ -85,12 +91,18 @@ const Register = () => {
             value={confirmp}
             onChange={(e) => setConfirmp(e.target.value)}
             placeholder="Confirm password"
+            className="border-2 border-black rounded-xl pl-2 bg-neutral h-8"
           />
-          <button type="submit">Register</button>
+          <button
+            className="border-2 border-black rounded-xl  bg-neutral h-8 "
+            type="submit"
+          >
+            Register
+          </button>
         </form>
         <p>
           already have an account?{" "}
-          <span>
+          <span className="text-blue-700 underline">
             <Link to={"/"}>Login</Link>
           </span>
         </p>
