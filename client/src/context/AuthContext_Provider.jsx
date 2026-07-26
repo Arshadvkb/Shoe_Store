@@ -92,6 +92,8 @@ export const AuthContextProvider = (props) => {
 
   const logout=()=>{
     console.log("logout clicked");
+      localStorage.removeItem("Active User");
+      navigate("/")
     
   }
 
