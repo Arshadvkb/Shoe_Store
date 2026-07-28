@@ -5,10 +5,16 @@ import Navbar from "./Navbar"
 
 const ProductDetails = () => {
     const {id}=useParams()
-    const {state}=useContext(ProductContext)
+    const {state,dispatch}=useContext(ProductContext)
     const products=state.products
     const product=products.find(product=> product.id===id)
     console.log(product);
+
+    const addToCart=(id)=>{
+        console.log(id);
+        console.log("hi");
+        dispatch({type:"ADD TO CART",payload:{id:id}})
+    }
 
   return (
     <div className="min-h-screen bg-tertiary">
@@ -82,7 +88,9 @@ const ProductDetails = () => {
                 </button>
               </div>
 
-              <button className="flex-1 rounded-xl bg-primary px-8 py-3 font-semibold text-white transition hover:scale-[1.02] hover:shadow-lg active:scale-95">
+              <button
+              onClick={()=>addToCart(product.id)}
+              className="flex-1 rounded-xl bg-primary px-8 py-3 font-semibold text-white transition hover:scale-[1.02] hover:shadow-lg active:scale-95">
                 Add to Cart
               </button>
 
