@@ -8,23 +8,19 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed z-50 w-full bg-tertiary shadow-md">
-      {/* Main Navbar */}
+    <nav className=" z-50 w-full bg-tertiary shadow-md">
       <div className="flex h-[10vh] items-center justify-between px-5 md:px-10">
-        {/* Logo */}
         <div className="font-extrabold text-2xl text-primary md:text-3xl">
           <h1>Shoe Store</h1>
         </div>
 
-        {/* Desktop Navigation */}
         <div className="hidden items-center gap-6 md:flex">
-          <Link to="/">Home</Link>
+          <Link to="/user/home">Home</Link>
           <Link to="/men">Men</Link>
           <Link to="/women">Women</Link>
           <Link to="/offers">Offers</Link>
         </div>
 
-        {/* Desktop Search */}
         <div className="hidden h-10 items-center gap-2 rounded-xl border-2 border-black p-2 md:flex">
           <input
             type="text"
@@ -37,7 +33,6 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Icons */}
         <div className="hidden items-center gap-4 md:flex">
           <button>
             <Heart />
@@ -48,7 +43,6 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Desktop Logout */}
         <button
           className="hidden h-10 w-20 rounded-2xl bg-primary md:block"
           onClick={logout}
@@ -56,7 +50,6 @@ const Navbar = () => {
           Logout
         </button>
 
-        {/* Mobile Menu Button */}
         <button
           className="md:hidden"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -65,10 +58,8 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="flex flex-col gap-5 border-t border-black/10 bg-tertiary p-5 md:hidden">
-          {/* Mobile Navigation */}
           <Link to="/user/home" onClick={() => setIsMenuOpen(false)}>
             Home
           </Link>
@@ -85,7 +76,6 @@ const Navbar = () => {
             Offers
           </Link>
 
-          {/* Mobile Search */}
           <div className="flex h-10 items-center gap-2 rounded-xl border-2 border-black p-2">
             <input
               type="text"
@@ -98,7 +88,6 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Mobile Icons */}
           <div className="flex items-center gap-5">
             <button>
               <Heart />
@@ -109,7 +98,6 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Mobile Logout */}
           <button
             className="h-10 w-full rounded-2xl bg-primary"
             onClick={logout}

@@ -22,7 +22,7 @@ const ImageSlider = () => {
   }
 
   return (
-    <div className="h-[90vh] min-w-screen overflow-hidden ">
+    <div className="h-[90vh] w-full overflow-hidden ">
       <img
         src={images[currentImage]}
         alt="Shoe"
