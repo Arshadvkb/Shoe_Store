@@ -1,21 +1,26 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/Auth_Context";
+import { CartContext } from "../../context/Cart_Context";
 import { Link } from "react-router-dom";
 import { Heart, Search, ShoppingCart, Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const { logout } = useContext(AuthContext);
+  const cartCtx = useContext(CartContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const cartCount = cartCtx?.getCartCount ? cartCtx.getCartCount() : 0;
+  const wishlistCount = cartCtx?.getWishlistCount ? cartCtx.getWishlistCount() : 0;
 
   return (
     <nav className=" z-50 w-full bg-tertiary shadow-md">
       <div className="flex h-[10vh] items-center justify-between px-5 md:px-10">
         <div className="font-extrabold text-2xl text-primary md:text-3xl">
-          <h1>Shoe Store</h1>
+          <Link to="/">Shoe Store</Link>
         </div>
 
         <div className="hidden items-center gap-6 md:flex">
-          <Link to="/user/home">Home</Link>
+          <Link to="/">Home</Link>
           <Link to="/men">Men</Link>
           <Link to="/women">Women</Link>
           <Link to="/offers">Offers</Link>
@@ -34,17 +39,27 @@ const Navbar = () => {
         </div>
 
         <div className="hidden items-center gap-4 md:flex">
-          <button>
-            <Heart />
+          <button className="relative p-1">
+            <Heart size={24} />
+            {wishlistCount > 0 && (
+              <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white">
+                {wishlistCount}
+              </span>
+            )}
           </button>
 
-          <button>
-            <ShoppingCart />
+          <button className="relative p-1">
+            <ShoppingCart size={24} />
+            {cartCount > 0 && (
+              <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+                {cartCount}
+              </span>
+            )}
           </button>
         </div>
 
         <button
-          className="hidden h-10 w-20 rounded-2xl bg-primary md:block"
+          className="hidden h-10 w-20 rounded-2xl bg-primary text-white font-semibold md:block"
           onClick={logout}
         >
           Logout
@@ -60,7 +75,7 @@ const Navbar = () => {
 
       {isMenuOpen && (
         <div className="flex flex-col gap-5 border-t border-black/10 bg-tertiary p-5 md:hidden">
-          <Link to="/user/home" onClick={() => setIsMenuOpen(false)}>
+          <Link to="/" onClick={() => setIsMenuOpen(false)}>
             Home
           </Link>
 
@@ -89,17 +104,27 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-5">
-            <button>
-              <Heart />
+            <button className="relative p-1">
+              <Heart size={24} />
+              {wishlistCount > 0 && (
+                <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white">
+                  {wishlistCount}
+                </span>
+              )}
             </button>
 
-            <button>
-              <ShoppingCart />
+            <button className="relative p-1">
+              <ShoppingCart size={24} />
+              {cartCount > 0 && (
+                <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+                  {cartCount}
+                </span>
+              )}
             </button>
           </div>
 
           <button
-            className="h-10 w-full rounded-2xl bg-primary"
+            className="h-10 w-full rounded-2xl bg-primary text-white font-semibold"
             onClick={logout}
           >
             Logout
@@ -111,3 +136,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

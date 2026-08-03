@@ -12,7 +12,7 @@ const User_router = () => {
         <ProductContextProvider>
           <CartContextProvider>
             <Routes>
-              <Route path="/user/home" element={<Home />} />
+              <Route path="/" element={<Home />} />
               <Route
                 path="/user/product/details/:id"
                 element={<ProductDetails />}

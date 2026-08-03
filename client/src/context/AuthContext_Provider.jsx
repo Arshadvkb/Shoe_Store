@@ -80,7 +80,7 @@ export const AuthContextProvider = (props) => {
         navigate("/admin/home");
       } else if (existingUser.role === "user") {
         alert("user login");
-        navigate("/user/home");
+        navigate("/");
       } else {
         alert("No user found");
         localStorage.removeItem("Active User");
@@ -93,7 +93,7 @@ export const AuthContextProvider = (props) => {
   const logout=()=>{
     console.log("logout clicked");
       localStorage.removeItem("Active User");
-      navigate("/")
+      navigate("/login")
     
   }
 
