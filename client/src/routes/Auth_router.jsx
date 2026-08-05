@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Login from "../pages/auth/Login";
-import { AuthContextProvider } from "../context/AuthContext_Provider";
+import { AuthContextProvider } from "../providers/AuthContext_Provider";
 import Register from "../pages/auth/Register";
 
 
@@ -10,7 +10,7 @@ const Auth_router = () => {
       <AuthContextProvider>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register/>} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </AuthContextProvider>
     </div>

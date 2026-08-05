@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "../pages/users/Home";
-import { AuthContextProvider } from "../context/AuthContext_Provider";
-import { ProductContextProvider } from "../context/Productcontext_Provider";
 import ProductDetails from "../components/User/ProductDetails";
-import { CartContextProvider } from "../context/CartContext_Provider";
+import { AuthContextProvider } from "../providers/AuthContext_Provider";
+import { ProductContextProvider } from "../providers/Productcontext_Provider";
+import { CartContextProvider } from "../providers/CartContext_Provider";
 
 const User_router = () => {
   return (

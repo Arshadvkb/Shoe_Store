@@ -1,6 +1,6 @@
 import { useReducer, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
-import { CartContext } from "./Cart_Context";
+import { CartContext } from "../context/Cart_Context";
 
 const initialState = {
   cart: [], 
