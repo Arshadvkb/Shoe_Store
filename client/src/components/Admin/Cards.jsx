@@ -60,7 +60,8 @@ const Cards = () => {
         <div className="text-right">
           <p className="text-sm text-gray-600">Inactive Products</p>
           <h1 className="text-4xl font-bold">
-            {products.filter((p) => !p.isActive).length}
+            {/* {products.filter((p) => !p.isActive).length}*/}
+            0
           </h1>
           <p className="text-sm text-orange-600">Soft Deleted</p>
         </div>
