@@ -20,6 +20,7 @@ const Register = () => {
         email: email,
         password: password,
         role: "user",
+        joined:Date(),
         cart: [],
         wishlist: [],
       };
