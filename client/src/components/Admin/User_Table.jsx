@@ -1,24 +1,15 @@
 import { useContext } from "react";
 import { Admincontext } from "../../context/Admin_conext";
 import { User } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import ViewAll from "./ViewAll";
+
 
 const User_Table = () => {
   const { state } = useContext(Admincontext);
   const users = state.users;
   return (
     <div className="px-5 h-107 overflow-y-auto rounded-xl border border-primary">
-      <div className="flex justify-between pt-3 pb-2  ">
-        <h1 className="text-2xl font-bold">Users</h1>
-        <NavLink
-          to="/admin/view-users"
-          className="h-10 w-40 bg-neutral border border-primary rounded-xl flex justify-center items-center"
-        >
-          <span >
-            View all
-            </span>
-        </NavLink>
-      </div>
+      <ViewAll name="Users"/>
       <table className="w-full table-fixed ">
         <thead className="sticky top-0  ">
           <tr className="text-gray-500 text-sm">
@@ -30,7 +21,8 @@ const User_Table = () => {
         </thead>
 
         <tbody>
-          {users.map((user) => (
+          {users.map((user) => 
+            user.role !== "admin" ? (
             <tr
               key={user.id}
               className="border-b last:border-none hover:bg-primary/5 transition"
@@ -64,8 +56,8 @@ const User_Table = () => {
               <td className="py-4 text-center text-gray-600 whitespace-nowrap">
                 {new Date(user.joined).toLocaleDateString("en-IN")}
               </td>
-            </tr>
-          ))}
+            </tr>) : null
+          )}
         </tbody>
       </table>
     </div>

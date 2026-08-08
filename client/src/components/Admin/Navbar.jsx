@@ -1,9 +1,8 @@
-import { Bell, Search, UserCircle2, LogOut } from "lucide-react";
-import { useContext } from "react";
-import { AuthContext } from "../../context/Auth_Context";
+import { Bell, Search, UserCircle2} from "lucide-react";
+
 
 const Navbar = () => {
-    const {logout}=useContext(AuthContext)
+  
   
   return (
     <nav className="h-16 w-full bg-secondary border-b border-gray-200 shadow-sm flex items-center justify-between px-6">
@@ -32,13 +31,6 @@ const Navbar = () => {
           </div>
         </div>
     
-        <button 
-          onClick={logout}
-          className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:opacity-90 transition"
-        >
-          <LogOut size={18} />
-          Logout
-        </button>
   
       </div>
     </nav>

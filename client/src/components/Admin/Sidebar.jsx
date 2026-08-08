@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { Home, Users, Package } from "lucide-react";
+import { Home, Users, Package, ShoppingCart, LogOut } from "lucide-react";
+import { AuthContext } from "../../context/Auth_Context";
+import { useContext } from "react";
 
 const Sidebar = () => {
+    const { logout } = useContext(AuthContext);
   return (
     <aside className="w-64 h-screen bg-secondary border-r border-gray-200 flex flex-col shadow-lg">
       {/* Logo */}
@@ -54,8 +57,30 @@ const Sidebar = () => {
           <Package size={20} />
           <span>Products</span>
         </NavLink>
+        <NavLink
+          to="/admin/view-orders"
+          className={({ isActive }) =>
+            `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
+              isActive
+                ? "bg-primary text-white shadow-md"
+                : "hover:bg-white hover:shadow text-gray-700"
+            }`
+          }
+        >
+          <ShoppingCart size={20} />
+          <span>Orders</span>
+        </NavLink>
       </nav>
 
+      <div className="flex justify-center p-4">
+        <button
+          onClick={logout}
+          className="flex items-center justify-center gap-2 bg-primary/70 text-white px-4 py-2 rounded-md hover:opacity-90 transition text-sm mx-auto min-w-[150px]"
+        >
+          <LogOut size={14} />
+          Logout
+        </button>
+      </div>
       {/* Footer */}
       <div className="p-4 border-t border-gray-200 text-center text-sm text-gray-500">
         © 2026 Shoe Store
