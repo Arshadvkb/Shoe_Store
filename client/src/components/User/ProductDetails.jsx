@@ -1,20 +1,30 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { useParams } from "react-router-dom"
 import { ProductContext } from "../../context/Product_Context"
+import { CartContext } from "../../context/Cart_Context"
 import Navbar from "./Navbar"
 
 const ProductDetails = () => {
-    const {id}=useParams()
-    const {state,dispatch}=useContext(ProductContext)
-    const products=state.products
-    const product=products.find(product=> product.id===id)
-    console.log(product);
+    const { id } = useParams()
+    const { state } = useContext(ProductContext)
+    const { addToCart, toggleWishlist, isInWishlist } = useContext(CartContext)
+    const [quantity, setQuantity] = useState(1)
 
-    const addToCart=(id)=>{
-        console.log(id);
-        console.log("hi");
-        dispatch({type:"ADD TO CART",payload:{id:id}})
+    const products = state.products || []
+    const product = products.find(p => p.id === id)
+
+    if (!product) {
+      return (
+        <div className="min-h-screen bg-tertiary">
+          <Navbar />
+          <div className="flex h-[80vh] items-center justify-center">
+            <p className="text-xl font-semibold text-gray-700">Loading product details...</p>
+          </div>
+        </div>
+      )
     }
+
+    const isWishlisted = isInWishlist ? isInWishlist(product.id) : false
 
   return (
     <div className="min-h-screen bg-tertiary">
@@ -26,7 +36,7 @@ const ProductDetails = () => {
           <div className="flex min-h-[500px] items-center justify-center rounded-2xl bg-secondary p-8">
             <img
               className="h-full max-h-[500px] w-full max-w-[500px] object-contain transition duration-500 hover:scale-105"
-              src={product.images[0]}
+              src={product.images ? product.images[0] : ""}
               alt={product.name}
             />
           </div>
@@ -35,7 +45,7 @@ const ProductDetails = () => {
           <div className="flex flex-col justify-center px-2 py-6 md:px-8">
             {/* Category */}
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">
-              {product.category && product.category.length > 1 ? `${product.category[0]}/ ${product.category[1]}` : product.category && product.category[0] ? product.category[0] : "Uncategorized"}
+              {product.category && product.category.length > 1 ? `${product.category[0]} / ${product.category[1]}` : product.category && product.category[0] ? product.category[0] : "Uncategorized"}
             </p>
 
             {/* Product Name */}
@@ -77,25 +87,39 @@ const ProductDetails = () => {
             {/* Quantity + Add to Cart */}
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <div className="flex items-center justify-between rounded-xl border border-gray-300 bg-white px-4 py-3 sm:w-32">
-                <button className="text-xl font-semibold text-gray-600">
+                <button
+                  onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
+                  className="text-xl font-semibold text-gray-600 hover:text-black"
+                >
                   −
                 </button>
 
-                <span className="font-semibold">1</span>
+                <span className="font-semibold">{quantity}</span>
 
-                <button className="text-xl font-semibold text-gray-600">
+                <button
+                  onClick={() => setQuantity(prev => prev + 1)}
+                  className="text-xl font-semibold text-gray-600 hover:text-black"
+                >
                   +
                 </button>
               </div>
 
               <button
-              onClick={()=>addToCart(product.id)}
-              className="flex-1 rounded-xl bg-primary px-8 py-3 font-semibold text-white transition hover:scale-[1.02] hover:shadow-lg active:scale-95">
+                onClick={() => addToCart(product, quantity)}
+                className="flex-1 rounded-xl bg-primary px-8 py-3 font-semibold text-white transition hover:scale-[1.02] hover:shadow-lg active:scale-95"
+              >
                 Add to Cart
               </button>
 
-              <button className="rounded-xl border-2 border-primary px-6 py-3 font-semibold text-primary transition hover:bg-primary hover:text-white">
-                ♡
+              <button
+                onClick={() => toggleWishlist(product)}
+                className={`rounded-xl border-2 border-primary px-6 py-3 font-semibold transition ${
+                  isWishlisted
+                    ? "bg-primary text-white"
+                    : "text-primary hover:bg-primary hover:text-white"
+                }`}
+              >
+                {isWishlisted ? "♥" : "♡"}
               </button>
             </div>
 
@@ -119,3 +143,4 @@ const ProductDetails = () => {
 }
 
 export default ProductDetails
+

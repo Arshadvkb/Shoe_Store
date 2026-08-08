@@ -1,8 +1,7 @@
 import { useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { AuthContext } from "./Auth_Context";
-
+import {AuthContext} from "../context/Auth_Context"
 const initialState = {
   name: "",
   username: "",
@@ -80,7 +79,7 @@ export const AuthContextProvider = (props) => {
         navigate("/admin/home");
       } else if (existingUser.role === "user") {
         alert("user login");
-        navigate("/user/home");
+        navigate("/");
       } else {
         alert("No user found");
         localStorage.removeItem("Active User");
@@ -93,7 +92,7 @@ export const AuthContextProvider = (props) => {
   const logout=()=>{
     console.log("logout clicked");
       localStorage.removeItem("Active User");
-      navigate("/")
+      navigate("/login")
     
   }
 
