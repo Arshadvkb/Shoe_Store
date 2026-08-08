@@ -1,7 +1,7 @@
 
 const Product_chart = () => {
   return (
-    <div className="w-full h-[270px] rounded-2xl border border-primary"></div>
+    <div className="w-full h-100 rounded-2xl border border-primary"></div>
   );
 }
 

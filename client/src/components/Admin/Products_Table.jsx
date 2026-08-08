@@ -10,7 +10,7 @@ products.map(p=>console.log("availability"+p.isAvailable))
   
  return (
    <div className="w-full h-[350px] rounded-2xl border border-primary bg-white overflow-hidden">
-     <div className="h-[275px] overflow-y-auto px-3">
+     <div className="h-[310px] overflow-y-auto px-3">
        <ViewAll name="Products" />
        <table className="w-full table-fixed border-collapse">
          <thead className="sticky top-0 z-10 bg-white">
