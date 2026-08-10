@@ -9,7 +9,7 @@ const User_Table = () => {
   const users = state.users;
   return (
     <div className="px-5 h-107 overflow-y-auto rounded-xl border border-primary">
-      <ViewAll name="Users"/>
+      <ViewAll name="Users" url="view-users"/>
       <table className="w-full table-fixed ">
         <thead className="sticky top-0  ">
           <tr className="text-gray-500 text-sm">
