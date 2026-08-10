@@ -19,6 +19,7 @@ const Register = () => {
         username: username,
         email: email,
         password: password,
+        isBlocked:false,
         role: "user",
         joined:Date(),
         cart: [],

@@ -37,6 +37,12 @@ export const AdmincontextProvider = (props) => {
   const FetchProducts=async()=>{
     const response = await axios.get("http://localhost:5000/products");
     dispatch({type:"FETCH PRODUCTS",payload:response.data})
+  };
+
+  const BlockUser=async(id)=>{
+    await axios.patch(`http://localhost:5000/users/${id}`, {
+      isBlocked:true,
+    });
   }
 
   const values = {
@@ -44,6 +50,7 @@ export const AdmincontextProvider = (props) => {
     FetchProducts,
     state,
     dispatch,
+    BlockUser
   };
   return (
     <Admincontext.Provider value={values}>
