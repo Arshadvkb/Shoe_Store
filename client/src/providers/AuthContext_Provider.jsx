@@ -72,7 +72,7 @@ export const AuthContextProvider = (props) => {
         return 0;
       }
 
-      localStorage.setItem("Active User", JSON.stringify(existingUser));
+      sessionStorage.setItem("Active User", JSON.stringify(existingUser));
 
       if (existingUser.role === "admin") {
         alert("Admin login");
@@ -82,7 +82,7 @@ export const AuthContextProvider = (props) => {
         navigate("/");
       } else {
         alert("No user found");
-        localStorage.removeItem("Active User");
+        sessionStorage.removeItem("Active User");
       }
     } catch (e) {
       console.log(e.message);
@@ -91,7 +91,7 @@ export const AuthContextProvider = (props) => {
 
   const logout=()=>{
     console.log("logout clicked");
-      localStorage.removeItem("Active User");
+      sessionStorage.removeItem("Active User");
       navigate("/login")
     
   }

@@ -1,7 +1,7 @@
 import {  Navigate, Outlet } from "react-router-dom";
 
 const ProtectdRout = ({ allowedRole }) => {
-  const activeUser = localStorage.getItem("Active User");
+  const activeUser = sessionStorage.getItem("Active User");
   if (!activeUser) {
     return <Navigate to="/" replace />;
   }

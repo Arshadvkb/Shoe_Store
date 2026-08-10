@@ -1,14 +1,36 @@
 import { useContext, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { ProductContext } from "../../context/Product_Context"
 import { CartContext } from "../../context/Cart_Context"
 import Navbar from "./Navbar"
 
 const ProductDetails = () => {
     const { id } = useParams()
+    const navigate = useNavigate()
     const { state } = useContext(ProductContext)
-    const { addToCart, toggleWishlist, isInWishlist } = useContext(CartContext)
+    const { addToCart, toggleWishlist, isInWishlist, isUserAuthenticated } = useContext(CartContext)
     const [quantity, setQuantity] = useState(1)
+
+    const isLoggedIn = isUserAuthenticated ? isUserAuthenticated() : false
+
+    const promptLogin = (message) => {
+      alert(message)
+      navigate("/login")
+    }
+
+    const handleAddToCart = () => {
+      if (!isLoggedIn) {
+        return promptLogin("Please log in to add items to your cart.")
+      }
+      addToCart(product, quantity)
+    }
+
+    const handleToggleWishlist = () => {
+      if (!isLoggedIn) {
+        return promptLogin("Please log in to manage your wishlist.")
+      }
+      toggleWishlist(product)
+    }
 
     const products = state.products || []
     const product = products.find(p => p.id === id)
@@ -105,14 +127,14 @@ const ProductDetails = () => {
               </div>
 
               <button
-                onClick={() => addToCart(product, quantity)}
+                onClick={handleAddToCart}
                 className="flex-1 rounded-xl bg-primary px-8 py-3 font-semibold text-white transition hover:scale-[1.02] hover:shadow-lg active:scale-95"
               >
                 Add to Cart
               </button>
 
               <button
-                onClick={() => toggleWishlist(product)}
+                onClick={handleToggleWishlist}
                 className={`rounded-xl border-2 border-primary px-6 py-3 font-semibold transition ${
                   isWishlisted
                     ? "bg-primary text-white"

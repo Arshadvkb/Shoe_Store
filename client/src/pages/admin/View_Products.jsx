@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import Layout from "./Layout";
 import { Admincontext } from "../../context/Admin_conext";
+import { NavLink } from "react-router-dom";
 
 const View_Products = () => {
   const { state, FetchProducts } = useContext(Admincontext);
@@ -35,9 +36,12 @@ const View_Products = () => {
               </p>
             </div>
 
-            <button className="px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:opacity-90 transition">
+            <NavLink
+              to="/admin/add-product"
+              className="px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:opacity-90 transition"
+            >
               + Add Product
-            </button>
+            </NavLink>
           </div>
 
           {/* Scrollable Table */}
@@ -103,7 +107,7 @@ const View_Products = () => {
                       <td className="px-6 py-4">
                         <span className="rounded-lg bg-secondary px-3 py-1 text-sm text-gray-700">
                           {Array.isArray(product.category)
-                            ? product.category.join(' / ')
+                            ? product.category.join(" / ")
                             : product.category}
                         </span>
                       </td>

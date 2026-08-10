@@ -13,15 +13,33 @@ const Wishlist = () => {
     clearWishlist,
     getWishlistCount,
     isInCart,
+    isUserAuthenticated,
   } = useContext(CartContext);
 
   const navigate = useNavigate();
   const count = getWishlistCount ? getWishlistCount() : wishlist.length;
+  const isLoggedIn = isUserAuthenticated ? isUserAuthenticated() : false;
+
+  const promptLogin = (message) => {
+    alert(message);
+    navigate("/login");
+  };
 
   const handleAddAllToCart = () => {
+    if (!isLoggedIn) {
+      return promptLogin("Please log in to add items to your cart.");
+    }
+
     wishlist.forEach((item) => {
       addToCart(item, 1);
     });
+  };
+
+  const handleAddToCart = (item) => {
+    if (!isLoggedIn) {
+      return promptLogin("Please log in to add items to your cart.");
+    }
+    addToCart(item, 1);
   };
 
   return (
@@ -97,7 +115,7 @@ const Wishlist = () => {
               <WishlistItem
                 key={item.id}
                 item={item}
-                onAddToCart={(prod) => addToCart(prod, 1)}
+                onAddToCart={(prod) => handleAddToCart(prod)}
                 onRemove={removeFromWishlist}
                 isInCart={isInCart ? isInCart(item.id) : false}
               />

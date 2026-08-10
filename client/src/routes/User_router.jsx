@@ -27,6 +27,7 @@ const User_router = () => {
               <Route path="/men" element={<CategoryProducts category="men" />} />
               <Route path="/women" element={<CategoryProducts category="women" />} />
               <Route path="/offers" element={<CategoryProducts category="offers" />} />
+              <Route path="/search" element={<CategoryProducts />} />
               <Route path="/category/:categoryName" element={<CategoryProducts />} />
             </Routes>
           </CartContextProvider>

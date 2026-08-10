@@ -101,14 +101,14 @@ export const CartContextProvider = (props) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
   const activeUserIdRef = useRef(null);
 
-  // Helper to get active user object from localStorage
+  // Helper to get active user object from sessionStorage
   const getActiveUser = () => {
-    const data = localStorage.getItem("Active User");
+    const data = sessionStorage.getItem("Active User");
     if (!data) return null;
     try {
       return JSON.parse(data);
     } catch (e) {
-      console.error("Failed to parse Active User from localStorage", e);
+      console.error("Failed to parse Active User from sessionStorage", e);
       return null;
     }
   };
@@ -140,9 +140,9 @@ export const CartContextProvider = (props) => {
         const userCart = fetchedUser.cart || [];
         const userWishlist = fetchedUser.wishlist || [];
 
-        // Sync local storage with latest fetched user cart & wishlist
+        // Sync session storage with latest fetched user cart & wishlist
         const updatedUser = { ...user, cart: userCart, wishlist: userWishlist };
-        localStorage.setItem("Active User", JSON.stringify(updatedUser));
+        sessionStorage.setItem("Active User", JSON.stringify(updatedUser));
 
         dispatch({
           type: "SET_CART_AND_WISHLIST",
@@ -199,8 +199,8 @@ export const CartContextProvider = (props) => {
       wishlist: updatedWishlist,
     };
 
-    // Update Local Storage active user
-    localStorage.setItem("Active User", JSON.stringify(updatedUser));
+    // Update sessionStorage active user
+    sessionStorage.setItem("Active User", JSON.stringify(updatedUser));
 
     // Sync with DB backend if user has id
     if (user.id) {

@@ -26,16 +26,44 @@ const CategoryProducts = ({ category: categoryProp }) => {
   ).toLowerCase();
 
   const { state, fetchProduct } = useContext(ProductContext);
-  const { addToCart, toggleWishlist, isInWishlist } = useContext(CartContext);
+  const { addToCart, toggleWishlist, isInWishlist, isUserAuthenticated } = useContext(CartContext);
 
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(() => {
+    return new URLSearchParams(location.search).get("query") || "";
+  });
   const [selectedColor, setSelectedColor] = useState("all");
   const [sortBy, setSortBy] = useState("default");
+
+  const isLoggedIn = isUserAuthenticated ? isUserAuthenticated() : false;
+
+  const promptLogin = (message) => {
+    alert(message);
+    navigate("/login");
+  };
+
+  const handleAddToCart = (product) => {
+    if (!isLoggedIn) {
+      return promptLogin("Please log in to add items to your cart.");
+    }
+    addToCart(product, 1);
+  };
+
+  const handleToggleWishlist = (product) => {
+    if (!isLoggedIn) {
+      return promptLogin("Please log in to manage your wishlist.");
+    }
+    toggleWishlist(product);
+  };
 
   // Always fetch products from API on mount
   useEffect(() => {
     fetchProduct();
   }, []);
+
+  useEffect(() => {
+    const queryValue = new URLSearchParams(location.search).get("query") || "";
+    setSearchQuery(queryValue);
+  }, [location.search]);
 
   // Products array directly from API
   const apiProducts = state.products || [];
@@ -253,7 +281,7 @@ const CategoryProducts = ({ category: categoryProp }) => {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        toggleWishlist(product);
+                        handleToggleWishlist(product);
                       }}
                       className={`absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full shadow-md backdrop-blur-sm transition-all active:scale-90 ${
                         isWishlisted
@@ -294,7 +322,7 @@ const CategoryProducts = ({ category: categoryProp }) => {
                       </span>
 
                       <button
-                        onClick={() => addToCart(product, 1)}
+                        onClick={() => handleAddToCart(product)}
                         className="flex items-center gap-1.5 rounded-xl bg-gray-900 px-3.5 py-2 text-xs font-bold text-white shadow-md transition hover:bg-primary active:scale-95"
                       >
                         <ShoppingCart size={14} />

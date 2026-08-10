@@ -4,15 +4,21 @@ import View_Users from "../pages/admin/View_Users";
 import View_Products from "../pages/admin/View_Products";
 import { AuthContextProvider } from "../providers/AuthContext_Provider";
 import { AdmincontextProvider } from "../providers/AdminContext-Provider";
+import AddProduct from "../pages/admin/AddProduct";
+import ProtectdRout from "../utils/ProtectdRout";
+
 const Admin_router = () => {
   return (
     <div>
       <AuthContextProvider>
         <AdmincontextProvider>
           <Routes>
-            <Route path="/admin/home" element={<Home />} />
-            <Route path="/admin/view-users" element={<View_Users />} />
-            <Route path="/admin/view-products" element={<View_Products />} />
+            <Route element={<ProtectdRout allowedRole="admin" />}>
+              <Route path="/admin/home" element={<Home />} />
+              <Route path="/admin/view-users" element={<View_Users />} />
+              <Route path="/admin/view-products" element={<View_Products />} />
+              <Route path="/admin/add-product" element={<AddProduct />} />
+            </Route>
           </Routes>
         </AdmincontextProvider>
       </AuthContextProvider>
