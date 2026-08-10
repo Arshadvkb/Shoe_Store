@@ -28,9 +28,8 @@ const CategoryProducts = ({ category: categoryProp }) => {
   const { state, fetchProduct } = useContext(ProductContext);
   const { addToCart, toggleWishlist, isInWishlist, isUserAuthenticated } = useContext(CartContext);
 
-  const [searchQuery, setSearchQuery] = useState(() => {
-    return new URLSearchParams(location.search).get("query") || "";
-  });
+  const queryParam = new URLSearchParams(location.search).get("query") || "";
+  const [searchQuery, setSearchQuery] = useState(queryParam);
   const [selectedColor, setSelectedColor] = useState("all");
   const [sortBy, setSortBy] = useState("default");
 
@@ -59,11 +58,6 @@ const CategoryProducts = ({ category: categoryProp }) => {
   useEffect(() => {
     fetchProduct();
   }, []);
-
-  useEffect(() => {
-    const queryValue = new URLSearchParams(location.search).get("query") || "";
-    setSearchQuery(queryValue);
-  }, [location.search]);
 
   // Products array directly from API
   const apiProducts = state.products || [];
@@ -198,7 +192,11 @@ const CategoryProducts = ({ category: categoryProp }) => {
               type="text"
               placeholder="Search products..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                const updatedSearch = e.target.value;
+                setSearchQuery(updatedSearch);
+                navigate(`/search?query=${encodeURIComponent(updatedSearch)}`);
+              }}
               className="w-full rounded-xl border border-gray-200 bg-white py-2.5 pl-10 pr-4 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>

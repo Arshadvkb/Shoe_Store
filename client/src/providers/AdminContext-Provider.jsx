@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Admincontext } from "../context/Admin_conext";
 import { useReducer } from "react";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   users: [],
@@ -27,7 +28,8 @@ const reducer = (state, action) => {
 export const AdmincontextProvider = (props) => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  
+  const navigate=useNavigate()
+
   const FetchUser = async () => {
     const response = await axios.get("http://localhost:5000/users");
     
@@ -45,12 +47,21 @@ export const AdmincontextProvider = (props) => {
     });
   }
 
+  const UnBlockUser=async(id)=>{
+     await axios
+       .patch(`http://localhost:5000/users/${id}`, {
+         isBlocked: false,
+       })
+       .then(navigate("/admin/view-users"));
+  }
+
   const values = {
+    state,
     FetchUser,
     FetchProducts,
-    state,
     dispatch,
-    BlockUser
+    BlockUser,
+    UnBlockUser,
   };
   return (
     <Admincontext.Provider value={values}>

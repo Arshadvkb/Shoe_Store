@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Home, Users, Package, ShoppingCart, LogOut } from "lucide-react";
+import { Home, Users, Package, LogOut } from "lucide-react";
 import { AuthContext } from "../../context/Auth_Context";
 import { useContext } from "react";
 
@@ -57,19 +57,7 @@ const Sidebar = () => {
           <Package size={20} />
           <span>Products</span>
         </NavLink>
-        <NavLink
-          to="/admin/view-orders"
-          className={({ isActive }) =>
-            `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
-              isActive
-                ? "bg-primary text-white shadow-md"
-                : "hover:bg-white hover:shadow text-gray-700"
-            }`
-          }
-        >
-          <ShoppingCart size={20} />
-          <span>Orders</span>
-        </NavLink>
+       
       </nav>
 
       <div className="flex justify-center p-4">

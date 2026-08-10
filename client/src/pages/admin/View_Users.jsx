@@ -2,6 +2,8 @@
 import { useContext, useEffect } from "react";
 import Layout from "./Layout";
 import { Admincontext } from "../../context/Admin_conext";
+import { Link } from "react-router-dom";
+import { Ban } from "lucide-react";
 
 const View_Users = () => {
   const { state, BlockUser,FetchUser } = useContext(Admincontext);
@@ -14,18 +16,22 @@ FetchUser()
 return (
   <Layout>
     <div className="p-6 w-full">
-      {/* Header */}
+  
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Users</h1>
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-sm text-gray-500 mt-1 mb-3">
           Manage registered users and their account status
         </p>
-        <a href="">Blocked users</a>
+        <Link
+        className="h-10 w-40 bg-primary p-2 mt-3 rounded-xl border-2 text-neutral flex gap-2"
+        to="/blocked">
+          <Ban/>
+          Blocked users</Link>
       </div>
 
-      {/* Table Card */}
+   
       <div className="w-full rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
-        {/* Table Header */}
+     
         <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
           <div>
             <h2 className="font-semibold text-gray-900">All Users</h2>
@@ -33,7 +39,7 @@ return (
           </div>
         </div>
 
-        {/* Scrollable Table */}
+      
         <div className="max-h-[600px] overflow-y-auto overflow-x-auto">
           <table className="w-full text-left">
             <thead className="sticky top-0 z-10 bg-tertiary">
@@ -65,7 +71,7 @@ return (
                     key={user.id}
                     className="border-b border-gray-100 hover:bg-primary/5 transition-colors"
                   >
-                    {/* User */}
+                
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
@@ -82,12 +88,12 @@ return (
                       </div>
                     </td>
 
-                    {/* Email */}
+                
                     <td className="px-6 py-4 text-sm text-gray-600">
                       {user.email}
                     </td>
 
-                    {/* Status */}
+                
                     <td className="px-6 py-4">
                       {user.isBlocked ? (
                         <span className="inline-flex items-center gap-2 rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-600">
