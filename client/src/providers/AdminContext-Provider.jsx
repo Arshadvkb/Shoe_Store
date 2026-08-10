@@ -55,6 +55,13 @@ export const AdmincontextProvider = (props) => {
        .then(navigate("/admin/view-users"));
   }
 
+  const AddProduct=async(formData)=>{
+    const response = await axios.post("http://localhost:5000/products",formData);
+    if(response){
+      alert("new product added")
+    }
+  }
+
   const values = {
     state,
     FetchUser,
@@ -62,6 +69,7 @@ export const AdmincontextProvider = (props) => {
     dispatch,
     BlockUser,
     UnBlockUser,
+    AddProduct,
   };
   return (
     <Admincontext.Provider value={values}>

@@ -8,7 +8,7 @@ const Cards = () => {
        FetchUser();
        FetchProducts();
      }, []);
-     const users = state.users ?? [];
+     const users = state.users.filter(u=>u.role!=="admin");
      const products = state.products ?? [];
      console.log(users);
      console.log(products);
