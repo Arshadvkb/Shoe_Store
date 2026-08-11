@@ -7,6 +7,7 @@ import { AdmincontextProvider } from "../providers/AdminContext-Provider";
 import AddProduct from "../pages/admin/AddProduct";
 import ProtectdRout from "../utils/ProtectdRout";
 import BlockedUsers from "../pages/admin/BlockedUsers";
+import EditProduct from "../pages/admin/EditProduct";
 
 const Admin_router = () => {
   return (
@@ -19,6 +20,7 @@ const Admin_router = () => {
               <Route path="/admin/view-users" element={<View_Users />} />
               <Route path="/admin/view-products" element={<View_Products />} />
               <Route path="/admin/add-product" element={<AddProduct />} />
+              <Route path="/admin/edit-product/:id" element={<EditProduct/>} />
               <Route path="/blocked" element={<BlockedUsers/>} />
             </Route>
           </Routes>

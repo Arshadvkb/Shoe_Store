@@ -1,11 +1,11 @@
 import { useContext, useEffect } from "react";
 import Layout from "./Layout";
 import { Admincontext } from "../../context/Admin_conext";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const View_Products = () => {
   const { state, FetchProducts } = useContext(Admincontext);
-
+const navigate= useNavigate()
   useEffect(() => {
     FetchProducts();
   }, []);
@@ -147,7 +147,10 @@ const View_Products = () => {
 
                       {/* Action */}
                       <td className="px-6 py-4">
-                        <button className="px-4 py-2 rounded-lg bg-primary/10 text-primary text-sm font-medium hover:bg-primary/20 transition">
+                        <button
+                          onClick={() => navigate(`/admin/edit-product/${product.id}`)}
+                          className="px-4 py-2 rounded-lg bg-primary/10 text-primary text-sm font-medium hover:bg-primary/20 transition"
+                        >
                           Edit
                         </button>
                       </td>
