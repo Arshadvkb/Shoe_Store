@@ -23,9 +23,10 @@ const View_Products = () => {
             onClick={() => navigate(`/user/product/details/${product.id}`)}
           >
             <img
-              src={product.images[1]}
+              src={`${product.images[0]}?w=500&q=70`}
               alt={product.name}
               className="h-48 w-full rounded-md object-cover"
+              loading="lazy"
             />
 
             <h2 className="mt-3 text-lg font-bold">{product.name}</h2>

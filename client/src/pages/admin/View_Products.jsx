@@ -138,9 +138,10 @@ const navigate= useNavigate()
                       <td className="px-6 py-3">
                         <div className="h-14 w-14 rounded-xl overflow-hidden border border-gray-200 bg-neutral">
                           <img
-                            src={product.images?.[0]}
+                            src={`${product.images?.[0]}?w=500&q=70`}
                             alt={product.name}
                             className="h-full w-full object-cover"
+                            loading="lazy"
                           />
                         </div>
                       </td>
